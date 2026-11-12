@@ -1,0 +1,37 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Setup Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --python 3.12
+
+      - name: Check Flet
+        run: uv run flet --version
+
+      - name: Build Android APK
+        run: uv run flet build apk --build-number ${{ github.run_number }}
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: amirabbas-calculator-apk
+          path: build/apk/*.apk
+          if-no-files-found: error
