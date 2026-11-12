@@ -1,0 +1,17 @@
+[project]
+name = "amirabbas-calculator"
+version = "1.0.0"
+description = "ماشین حساب امیرعباس عبادی"
+requires-python = ">=3.10"
+dependencies = [
+    "flet>=0.80.0,<1.0.0",
+]
+
+[tool.flet]
+org = "com.amirabbas"
+product = "ماشین حساب امیرعباس عبادی"
+company = "Amirabbas"
+copyright = "Copyright (C) 2026"
+
+[tool.flet.app]
+path = "."
